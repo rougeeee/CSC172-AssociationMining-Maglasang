@@ -1,1 +1,1 @@
-# CSC172-AssociationMining-Mahlasang
+# CSC172-AssociationMining-Maglasang
