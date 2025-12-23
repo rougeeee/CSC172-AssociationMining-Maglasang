@@ -1,50 +1,65 @@
-# CSC173 Deep Computer Vision Project Progress Report
-**Student:** [Your Name], [ID]  
-**Date:** [Progress Submission Date]  
-**Repository:** [https://github.com/yourusername/CSC173-DeepCV-YourLastName](https://github.com/yourusername/CSC173-DeepCV-YourLastName)  
+# CSC172 Association Rule Mining Project Progress Report
+**Student:** Preciano B. Maglasang Jr., 2022-2298 
+**Date:** 12/23/2025  
+**Repository:** [https://github.com/rougeeee/CSC173-AssociationMining-Maglasang](https://github.com/rougeeee/CSC172-AssociationMining-Maglasang) 
 
 
 ## 📊 Current Status
 | Milestone | Status | Notes |
 |-----------|--------|-------|
-| Dataset Preparation | ✅ Completed | [X] images downloaded/preprocessed |
-| Initial Training | ✅ In Progress | [X] epochs completed |
-| Baseline Evaluation | ⏳ Pending | Training ongoing |
-| Model Fine-tuning | ⏳ Not Started | Planned for tomorrow |
+| Dataset Preparation	| ✅ Completed	| MovieLens Latest Small downloaded from Kaggle |
+| Data Preprocessing	| ✅ Completed	| Ratings filtered, genres split, transactions created |
+| Frequent Itemset Mining	| ✅ Completed	| Apriori applied with optimized parameters |
+| Association Rule Generation	| ⚠️ Optimized	| Performance improved using higher support & max_len |
+Results Interpretation	| ⏳ In Progress	| Analyzing top rules and visualizations |
 
 ## 1. Dataset Progress
-- **Total images:** [e.g., 4,200]
-- **Train/Val/Test split:** [e.g., 70%/15%/15% or 2,940/630/630]
-- **Classes implemented:** [e.g., 6 classes: plastic, metal, paper, glass, organic, other]
-- **Preprocessing applied:** Resize(640), normalization, augmentation (flip, rotate, brightness)
+- Dataset: MovieLens Latest Small (Kaggle)
+- Total users (transactions): ~600
+- Total ratings: ~100,000
+- Genres considered: Action, Adventure, Comedy, Drama, Romance, Sci-Fi, Thriller, Horror, etc.
+- Preprocessing applied:
+  - Ratings ≥ 3.5 treated as “watched”
+  - Genres split into individual items
+  - Grouped by userId to form transactions
+  - One-hot encoding using TransactionEncoder
 
-**Sample data preview:**
-![Dataset Sample](images/dataset_sample.png)
+**Sample transaction format:**
+- User 1 → {Action, Adventure, Sci-Fi}
+- User 2 → {Romance, Drama}
 
-## 2. Training Progress
+## 2. Mining Progress
+- Frequent Itemset Mining
+- Algorithm: Apriori
+- Minimum Support: 0.08 (optimized for speed)
+- Maximum Itemset Length: 3
 
-**Training Curves (so far)**
-![Loss Curve](images/loss_curve.png)
-![mAP Curve](images/map_curve.png)
+**Result:**
+- Frequent genre combinations such as {Action, Adventure}, {Romance, Drama}, and {Comedy, Romance} were successfully identified.
 
-**Current Metrics:**
-| Metric | Train | Val |
-|--------|-------|-----|
-| Loss | [0.45] | [0.62] |
-| mAP@0.5 | [78%] | [72%] |
-| Precision | [0.81] | [0.75] |
-| Recall | [0.73] | [0.68] |
+**Association Rule Generation**\
+- **Metrics used:**
+  - Support
+  - Confidence (≥ 0.6)
+  - Lift
+
+**Sample Rules (Top Results):**
+| Antecedent	| Consequent	| Support	| Confidence	| Lift |
+|-------------|-------------|---------|-------------|------|
+| Action	| Adventure	| 0.21	| 0.68	| 1.32 |
+| Romance	| Drama	| 0.18	| 0.72	| 1.41 |
+| Comedy	| Romance	| 0.12	| 0.65	| 1.25 |
 
 ## 3. Challenges Encountered & Solutions
-| Issue | Status | Resolution |
-|-------|--------|------------|
-| CUDA out of memory | ✅ Fixed | Reduced batch_size from 32→16 |
-| Class imbalance | ⏳ Ongoing | Added class weights to loss function |
-| Slow validation | ⏳ Planned | Implement early stopping |
+| Issue	| Status	| Resolution |
+| Slow rule generation	| ✅ Fixed	| Increased min_support and limited max_len |
+| Too many candidate rules |	✅ Fixed	| Sorted by lift and kept top 10 rules |
+| High computation time	| ⚠️ Improved	| Dataset sampling used during testing |
+| Interpretation of results	| ⏳ Ongoing	| Added network graph visualization |
 
 ## 4. Next Steps (Before Final Submission)
-- [ ] Complete training (50 more epochs)
-- [ ] Hyperparameter tuning (learning rate, augmentations)
-- [ ] Baseline comparison (vs. original pre-trained model)
-- [ ] Record 5-min demo video
-- [ ] Write complete README.md with results
+- {✅}Finalize interpretation of top association rules
+- {✅}Generate final network graph and tables
+- {✅}Write conclusions and discussion section
+- {✅}Clean and finalize README.md
+- {✅}Prepare screenshots for notebook and GitHub
