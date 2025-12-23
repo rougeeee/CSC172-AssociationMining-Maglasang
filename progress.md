@@ -1,6 +1,8 @@
 # CSC172 Association Rule Mining Project Progress Report
 **Student:** Preciano B. Maglasang Jr., 2022-2298 
+
 **Date:** 12/23/2025  
+
 **Repository:** [https://github.com/rougeeee/CSC173-AssociationMining-Maglasang](https://github.com/rougeeee/CSC172-AssociationMining-Maglasang) 
 
 
