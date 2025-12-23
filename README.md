@@ -1,12 +1,12 @@
-# [Project Title: e.g., Real-Time Object Detection for Waste Sorting]
-**CSC173 Intelligent Systems Final Project**  
+# Movie Genre Watching Pattern Analysis using Association Rule Mining
+**CSC172 Data Mining and Analysis Final Project**  
 *Mindanao State University - Iligan Institute of Technology*  
-**Student:** [Your Full Name], [Student ID]  
-**Semester:** [e.g., AY 2025-2026 Sem 1]  
+**Student:** Preciano B. Maglasang Jr., 2022-2298 
+**Semester:**  AY 2025-2026 Sem 1  
 [![Python](https://img.shields.io/badge/Python-3.8+-blue)](https://python.org) [![PyTorch](https://img.shields.io/badge/PyTorch-2.0-orange)](https://pytorch.org)
 
 ## Abstract
-[150-250 words: Summarize problem (e.g., "Urban waste sorting in Mindanao"), dataset, deep CV method (e.g., YOLOv8 fine-tuned on custom trash images), key results (e.g., 92% mAP), and contributions.][web:25][web:41]
+This project analyzes movie-watching patterns to discover relationships between genres frequently watched together. Using the MovieLens Latest Small dataset from Kaggle (~100,000 ratings), the project applies the Apriori algorithm to extract frequent genre combinations and generate association rules with metrics such as support, confidence, and lift. The results can inform personalized movie recommendations and provide insights into user preferences. Top rules indicate strong associations between genres like Action–Adventure and Romance–Drama, demonstrating practical applications for streaming platforms. The contributions include a full preprocessing pipeline, rule generation, and visualizations of the top associations.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -21,85 +21,73 @@
 
 ## Introduction
 ### Problem Statement
-[Describe the real-world vision problem and why it matters locally (e.g., IoT waste systems in Iligan).]
+Streaming platforms struggle to understand user preferences across the vast range of movies. Identifying which genres are frequently watched together can enhance recommendation systems and improve user experience. This project analyzes user ratings to uncover genre associations using association rule mining techniques, providing actionable insights for content curation and personalized recommendations.
 
 ### Objectives
-- [Objective 1: e.g., Achieve >90% detection accuracy]
-- [Objective 2: Integrate with decision logic]
-- [Objective 3: Deploy on edge device]
-
-![Problem Demo](images/problem_example.gif) [web:41]
+- Identify frequent genre combinations using the Apriori algorithm.
+- Generate association rules with support, confidence, and lift.
+- Visualize the top rules for interpretation and insights.
 
 ## Related Work
-- [Paper 1: YOLOv8 for real-time detection [1]]
-- [Paper 2: Transfer learning on custom datasets [2]]
-- [Gap: Your unique approach, e.g., Mindanao-specific waste classes] [web:25]
+- MovieLens dataset frequently used for collaborative filtering and recommendation studies.
+- Association Rule Mining applied in e-commerce and content recommendation.
+Gap: Few studies explore direct genre association patterns for small streaming datasets, making this project locally relevant.
 
 ## Methodology
 ### Dataset
-- Source: [e.g., Custom 5K images + COCO subset]
-- Split: 70/15/15 train/val/test
-- Preprocessing: Augmentation, resizing to 640x640 [web:41]
+- **Source:** [MovieLens Latest Small – Kaggle](https://www.kaggle.com/datasets/grouplens/movielens-latest-small)
+ (~100k ratings)
+- **Features:** userId, movieId, rating, genres
+- **Preprocessing:** Ratings ≥3.5 considered “watched,” genres split into lists, grouped by user for transactions.
 
 ### Architecture
-![Model Diagram](images/architecture.png)
-- Backbone: [e.g., CSPDarknet53]
-- Head: [e.g., YOLO detection layers]
-- Hyperparameters: Table below
-
-| Parameter | Value |
-|-----------|-------|
-| Batch Size | 16 |
-| Learning Rate | 0.01 |
-| Epochs | 100 |
-| Optimizer | SGD |
-
-### Training Code Snippet
-train.py excerpt
-model = YOLO('yolov8n.pt')
-model.train(data='dataset.yaml', epochs=100, imgsz=640)
+#### Association Rule Mining Pipeline
+- Convert user-genre transactions into one-hot encoded format.
+- Apply Apriori algorithm with minimum support of 0.05.
+- Generate association rules with minimum confidence of 0.6.
+- Sort rules by lift and visualize top associations using a network graph.
 
 
 ## Experiments & Results
-### Metrics
-| Model | mAP@0.5 | Precision | Recall | Inference Time (ms) |
-|-------|---------|-----------|--------|---------------------|
-| Baseline (YOLOv8n) | 85% | 0.87 | 0.82 | 12 |
-| **Ours (Fine-tuned)** | **92%** | **0.94** | **0.89** | **15** |
+Top Rules (Example)
+| Antecedent	| Consequent	| Support	| Confidence	| Lift |
+|-------------|-------------|---------|-------------|------|
+| Action	| Adventure	| 0.21	| 0.68	| 1.32 |
+| Romance	| Drama	| 0.18	| 0.72	| 1.41 |
+| Comedy	| Romance	| 0.12	| 0.65	| 1.25 |
 
-![Training Curve](images/loss_accuracy.png)
+<img width="1270" height="768" alt="image" src="https://github.com/user-attachments/assets/6ae46d69-0954-43fe-943b-94ceab42384f" />
 
 ### Demo
-![Detection Demo](demo/detection.gif)
-[Video: [CSC173_YourLastName_Final.mp4](demo/CSC173_YourLastName_Final.mp4)] [web:41]
+Video: [CSC172_Maglasang_Final.mp4](https://drive.google.com/drive/folders/1UkbXyJSbzTVtFKcuMpukK938qX7PQwH6?usp=sharing)
 
 ## Discussion
-- Strengths: [e.g., Handles occluded trash well]
-- Limitations: [e.g., Low-light performance]
-- Insights: [e.g., Data augmentation boosted +7% mAP] [web:25]
-
+- **Strengths:** Reveals strong genre pairings, easy to interpret, applicable for recommendation.
+- **Limitations:** Rare genres may produce few rules; dataset may not represent all users.
+- **Insights:** Rules confirm intuitive pairings (Action–Adventure, Romance–Drama), and network visualization helps identify influential genres.
+  
 ## Ethical Considerations
-- Bias: Dataset skewed toward plastic/metal; rural waste underrepresented
-- Privacy: No faces in training data
-- Misuse: Potential for surveillance if repurposed [web:41]
+- **Bias:** Dataset skews toward popular movies; niche genres underrepresented.
+- **Privacy:** No personally identifiable information is exposed.
+- **Misuse:** Results are for recommendation purposes only, not predictive of user behavior beyond dataset.
 
 ## Conclusion
-[Key achievements and 2-3 future directions, e.g., Deploy to Raspberry Pi for IoT.]
+This project successfully extracts genre association rules using ARM from the MovieLens dataset, providing interpretable patterns for movie recommendation systems. Future work includes applying the method to larger datasets, integrating with collaborative filtering, and testing personalized recommendation performance.
 
 ## Installation
-1. Clone repo: `git clone https://github.com/yourusername/CSC173-DeepCV-YourLastName`
+1. Clone repo: `git clone https://github.com/rougeeee/CSC173-AssociationMining-MovieGenre`
 2. Install deps: `pip install -r requirements.txt`
-3. Download weights: See `models/` or run `download_weights.sh` [web:22][web:25]
-
-**requirements.txt:**
-torch>=2.0
-ultralytics
-opencv-python
-albumentations
+3. Download MovieLens dataset from Kaggle and place CSV files in data/.
+   - **requirements.txt**
+     - pandas
+     - mlxtend
+     - networkx
+     - matplotlib
 
 ## References
-[1] Jocher, G., et al. "YOLOv8," Ultralytics, 2023.  
-[2] Deng, J., et al. "ImageNet: A large-scale hierarchical image database," CVPR, 2009. [web:25]
+[1] Grouplens. "MovieLens Latest Small Dataset," Kaggle, 2023.
+[2] Agrawal, R., Srikant, R. "Fast algorithms for mining association rules," VLDB, 1994.
+[3] Raschka, S. "mlxtend: Machine Learning Extensions," 2021.
 
 ## GitHub Pages
-View this project site: [https://jjmmontemayor.github.io/CSC173-DeepCV-Montemayor/](https://jjmmontemayor.github.io/CSC173-DeepCV-Montemayor/) [web:32]
+View this project site: [[https://github.com/rougeeee/CSC172-AssociationMining-Maglasang/](https://github.com/rougeeee/CSC172-AssociationMining-Maglasang)]
