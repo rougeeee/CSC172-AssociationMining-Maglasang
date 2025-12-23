@@ -52,9 +52,9 @@ Gap: Few studies explore direct genre association patterns for small streaming d
 Top Rules (Example)
 | Antecedent	| Consequent	| Support	| Confidence	| Lift |
 |-------------|-------------|---------|-------------|------|
-| Action	| Adventure	| 0.21	| 0.68	| 1.32 |
-| Romance	| Drama	| 0.18	| 0.72	| 1.41 |
-| Comedy	| Romance	| 0.12	| 0.65	| 1.25 |
+| IMAX, Film-Noir	| Documentary	| 0.17	| 0.66	| 2.12 |
+| Film-Noir, Children	| Documentary	| 0.18	| 0.64	| 2.05 |
+| Documentary, Musical	| Film-Noir	| 0.17	| 0.7	| 2.05 |
 
 <img width="1270" height="768" alt="image" src="https://github.com/user-attachments/assets/6ae46d69-0954-43fe-943b-94ceab42384f" />
 
